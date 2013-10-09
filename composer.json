@@ -1,0 +1,15 @@
+{
+ "name": "mayflower/ldap-bundle",
+ "type": "symfony-bundle",
+ "description": "Symfony MayflowerLdapBundle",
+ "minimum-stability": "dev",
+ "autoload": {
+  "psr-0": { "Mayflower\\LdapBundle": "" }
+ },
+ "target-dir": "Mayflower/LdapBundle",
+ "extra": {
+  "branch-alias": {
+   "dev-master": "master"
+  }
+ }
+}

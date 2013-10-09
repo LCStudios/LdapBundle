@@ -1,0 +1,4 @@
+services:
+    security.authentication.provider.ldap:
+        class: '%security.authentication.provider.ldap.class%'
+        arguments: ['', '@security.user_checker', '', '%security.authentication.hide_user_not_found%']

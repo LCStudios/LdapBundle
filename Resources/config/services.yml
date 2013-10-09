@@ -1,0 +1,24 @@
+parameters:
+    # userprovider param
+    mayflower_ldap_user_provider.inactive_key_value: shadowflag=1
+    # class parameters
+    mayflower_ldap.user_provider.class: Mayflower\LdapBundle\Security\User\LdapUserProvider
+    mayflower_ldap.authentication_provider.class: Mayflower\LdapBundle\Security\Authentication\Provider\LdapAuthenticationProvider
+    security.user_checker.class: Symfony\Component\Security\Core\User\UserChecker
+    mayflower_ldap.ldap.class: Mayflower\LdapBundle\Security\Ldap\Ldap
+
+services:
+    security.user_checker:
+        class: %security.user_checker.class%
+
+    mayflower_ldap_user_provider:
+        class: %mayflower_ldap.user_provider.class%
+        arguments: [@mayflower_ldap.ldap, %mayflower_ldap_user_provider.inactive_key_value%]
+
+    mayflower_ldap.security.authentication.provider:
+        class: %mayflower_ldap.authentication_provider.class%
+        arguments: ['', @security.user_checker , '', %security.authentication.hide_user_not_found% ]
+
+    mayflower_ldap.ldap:
+        class: %mayflower_ldap.ldap.class%
+        arguments: [%mayflower_ldap.ldap.host%, %mayflower_ldap.ldap.port%, %mayflower_ldap.ldap.dn%, %mayflower_ldap.ldap.username_suffix%, %mayflower_ldap.ldap.admin.enable%, %mayflower_ldap.ldap.admin.dn%, %mayflower_ldap.ldap.admin.password%]

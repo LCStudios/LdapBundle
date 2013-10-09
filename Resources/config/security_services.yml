@@ -1,0 +1,4 @@
+services:
+    security.user_checker:
+        class: '%security.user_checker.class%'
+        arguments: {  }
