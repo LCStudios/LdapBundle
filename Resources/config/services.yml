@@ -21,4 +21,4 @@ services:
 
     mayflower_ldap.ldap:
         class: %mayflower_ldap.ldap.class%
-        arguments: [%mayflower_ldap.ldap.host%, %mayflower_ldap.ldap.port%, %mayflower_ldap.ldap.dn%, %mayflower_ldap.ldap.username_suffix%, %mayflower_ldap.ldap.admin.enable%, %mayflower_ldap.ldap.admin.dn%, %mayflower_ldap.ldap.admin.password%]
+        arguments: [%mayflower_ldap.host%, %mayflower_ldap.port%, %mayflower_ldap.uid%, %mayflower_ldap.base_dn%, %mayflower_ldap.authenticated_role%, %mayflower_ldap.bind_user.dn%, %mayflower_ldap.bind_user.password%]

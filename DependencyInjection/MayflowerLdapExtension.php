@@ -22,6 +22,14 @@ class MayflowerLdapExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('mayflower_ldap.host', $config['host']);
+        $container->setParameter('mayflower_ldap.port', $config['port']);
+        $container->setParameter('mayflower_ldap.uid', $config['uid']);
+        $container->setParameter('mayflower_ldap.base_dn', $config['base_dn']);
+        $container->setParameter('mayflower_ldap.authenticated_role', $config['authenticated_role']);
+        $container->setParameter('mayflower_ldap.bind_user.dn', $config['bind_user']['dn']);
+        $container->setParameter('mayflower_ldap.bind_user.password', $config['bind_user']['password']);
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }

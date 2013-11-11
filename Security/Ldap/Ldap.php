@@ -21,9 +21,9 @@ class Ldap implements LdapInterface
     private $optReferrals;
     private $username;
     private $password;
-    private $enableAdmin;
     private $adminDn;
     private $adminPassword;
+    private $authenticatedRole;
 
     private $boundListing;
 
@@ -36,7 +36,7 @@ class Ldap implements LdapInterface
      * @param integer $port
      * @param string $dn
      * @param string $usernameSuffix
-     * @param boolean $enableAdmin
+     * @param string $authenticatedRole
      * @param string $adminDn
      * @param string $adminPassword
      * @param integer $version
@@ -50,7 +50,7 @@ class Ldap implements LdapInterface
         $port = 389,
         $dn = null,
         $usernameSuffix = null,
-        $enableAdmin = false,
+        $authenticatedRole = 'ROLE_USER',
         $adminDn = null,
         $adminPassword = null,
         $version = 3,
@@ -60,20 +60,20 @@ class Ldap implements LdapInterface
     )
     {
         if (!extension_loaded('ldap')) {
-            throw new LdapException('Ldap module is needed. ');
+            throw new LdapException('Ldap module is needed.');
         }
 
-        $this->host             = $host;
-        $this->port             = $port;
-        $this->dn               = $dn;
-        $this->usernameSuffix   = $usernameSuffix;
-        $this->enableAdmin      = (boolean) $enableAdmin;
-        $this->adminDn          = $adminDn;
-        $this->adminPassword    = $adminPassword;
-        $this->version          = $version;
-        $this->useSsl           = (boolean) $useSsl;
-        $this->useStartTls      = (boolean) $useStartTls;
-        $this->optReferrals     = (boolean) $optReferrals;
+        $this->host              = $host;
+        $this->port              = $port;
+        $this->dn                = $dn;
+        $this->usernameSuffix    = $usernameSuffix;
+        $this->authenticatedRole = $authenticatedRole;
+        $this->adminDn           = $adminDn;
+        $this->adminPassword     = $adminPassword;
+        $this->version           = $version;
+        $this->useSsl            = (boolean) $useSsl;
+        $this->useStartTls       = (boolean) $useStartTls;
+        $this->optReferrals      = (boolean) $optReferrals;
 
         $this->connection = null;
     }
@@ -303,12 +303,12 @@ class Ldap implements LdapInterface
                 if (!$tlsResult) throw new ConnectionException('TLS initialization failed!');
             }
 
-            if ($this->enableAdmin) {
+            if ($this->adminDn) {
                 if ( ($this->adminDn === null) || ($this->adminPassword === null) ) {
-                    throw new ConnectionException('Admin bind required but credentials not provided. Please see ldapcredentials.yml.');
+                    throw new ConnectionException('Bind user required but credentials not provided. Please add it to your config.');
                 }
                 if (false === @ldap_bind($this->connection, $this->adminDn, $this->adminPassword)) {
-                    throw new ConnectionException('Admin bind credentials incorrect. Please see ldapcredentials.yml or review your LDAP configurations.');
+                    throw new ConnectionException('Bind user credentials incorrect. Please review your LDAP configurations.');
                 }
             }
         }
@@ -333,7 +333,7 @@ class Ldap implements LdapInterface
             }
         }
         // if we got here, we couldn't bind to any of the listings that were provided
-        throw new ConnectionException(sprintf('Username / password invalid to connect on Ldap server %s:%s', $this->host, $this->port));
+        throw new ConnectionException(sprintf('Username or password invalid to connect on Ldap server %s:%s', $this->host, $this->port));
     }
 
     public function unbind()
@@ -432,26 +432,22 @@ class Ldap implements LdapInterface
         if ( $this->boundListing === null ) {
             $this->bind();
         }
+
+        $roles = array($this->authenticatedRole);
+
         if (isset($this->boundListing['memberof'])) {
-            $roles = array();
-            foreach ($this->boundListing['memberof'] as $fullOuListing)
+            foreach ($this->boundListing['memberof'] as $fullOuGroupListing)
             {
                 $matches = array();
-                preg_match_all('/(ou=[^,]+)/i', $fullOuListing, $matches);
+                preg_match_all('/(cn=[^,]+|ou=[^,]+)/i', $fullOuGroupListing, $matches);
                 foreach ( $matches[0] as $membership )
                 {
                     $roles[] = 'ROLE_'.strtoupper(preg_replace('/.*=/', '', $membership));
                 }
             }
-
-            // this is necessary due to it being possible that the user is in a group but not in a OU
-            if (count($roles)) {
-                return array_unique($roles);
-            }
         }
 
-        // TODO: set default role in config?
-        return array('ROLE_USER');
+        return array_unique($roles);
     }
 
     public function getBoundListing()

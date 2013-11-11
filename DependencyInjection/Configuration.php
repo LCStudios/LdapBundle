@@ -20,9 +20,45 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('mayflower_ldap');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->arrayNode('bind_user')
+                    ->children()
+                        ->scalarNode('dn')
+                            ->defaultNull()
+                            ->info('DN of user to bind to the LDAP server. null if anonymous binding')
+                            ->example('cn=ldapread,cn=serviceusers,dc=example,dc=com')
+                        ->end()
+                        ->scalarNode('password')
+                            ->defaultNull()
+                            ->info('Password of user to bind to the LDAP server')
+                            ->example('readuserpw')
+                        ->end()
+                    ->end()
+                ->end()
+                ->scalarNode('host')
+                    ->defaultValue('localhost')
+                    ->info('LDAP server host')
+                ->end()
+                ->integerNode('port')
+                    ->defaultValue(389)
+                    ->info('LDAP server port')
+                ->end()
+                ->scalarNode('base_dn')
+                    ->defaultNull()
+                    ->info('Base DN for Users')
+                    ->example('cn=users,dc=example,dc=com')
+                ->end()
+                ->scalarNode('authenticated_role')
+                    ->defaultValue('ROLE_USER')
+                    ->info('role of all authenticated users additionally to their OUs and groups')
+                ->end()
+                ->scalarNode('uid')
+                    ->defaultValue('uid')
+                    ->info('Attribute to use to find user')
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }
