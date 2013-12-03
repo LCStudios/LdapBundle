@@ -8,6 +8,7 @@ use Mayflower\LdapBundle\Security\Ldap\Exception\LdapException;
 /*
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  * @author Francis Besset <francis.besset@gmail.com>
+ * @author Markus Handschuh <markus.handschuh@mayflower.de>
  */
 class Ldap implements LdapInterface
 {
@@ -427,27 +428,46 @@ class Ldap implements LdapInterface
         return $username.','.$this->usernameSuffix;
     }
 
+    /**
+     * @return array
+     */
     public function getBoundRolesByOrgs()
     {
-        if ( $this->boundListing === null ) {
+        $boundListing = $this->getBoundListing();
+        if ($boundListing === null) {
             $this->bind();
         }
 
-        $roles = array($this->authenticatedRole);
+        $memberOfListing    = $boundListing['memberof'];
+        $groupMemberListing = $boundListing['groupmembership'];
 
-        if (isset($this->boundListing['memberof'])) {
-            foreach ($this->boundListing['memberof'] as $fullOuGroupListing)
+        $roles = array_merge(
+            array($this->authenticatedRole),
+            (isset($memberOfListing))    ? $this->matchRolesFromGroupListing($memberOfListing)    : array(),
+            (isset($groupMemberListing)) ? $this->matchRolesFromGroupListing($groupMemberListing) : array()
+        );
+
+        return array_unique($roles);
+    }
+
+    /**
+     * @param array $groupListing
+     * @return array
+     */
+    public function matchRolesFromGroupListing(array $groupListing)
+    {
+        $roles = array();
+        foreach ($groupListing as $fullOuGroupListing) {
+            $matches = array();
+            preg_match_all('/(cn=[^,]+|ou=[^,]+)/i', $fullOuGroupListing, $matches);
+
+            foreach ( $matches[0] as $membership )
             {
-                $matches = array();
-                preg_match_all('/(cn=[^,]+|ou=[^,]+)/i', $fullOuGroupListing, $matches);
-                foreach ( $matches[0] as $membership )
-                {
-                    $roles[] = 'ROLE_'.strtoupper(preg_replace('/.*=/', '', $membership));
-                }
+                $roles[] = 'ROLE_'.strtoupper(preg_replace('/.*=/', '', $membership));
             }
         }
 
-        return array_unique($roles);
+        return $roles;
     }
 
     public function getBoundListing()
