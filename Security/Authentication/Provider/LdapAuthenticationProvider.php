@@ -19,11 +19,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * credentials to the ldap.
  *
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
+ * @author Markus Handschuh <markus.handschuh@mayflower.de>
  */
 class LdapAuthenticationProvider extends UserAuthenticationProvider
 {
+
+    /**
+     * @var LdapUserProviderInterface
+     */
     private $userProvider;
-    private $ldap;
 
     /**
      * Constructor.
@@ -48,8 +52,6 @@ class LdapAuthenticationProvider extends UserAuthenticationProvider
         if ("" === ($presentedPassword = $token->getCredentials())) {
             throw new BadCredentialsException('The presented password cannot be empty.');
         }
-
-        // At this point, the $user is already authenticated
     }
 
     /**

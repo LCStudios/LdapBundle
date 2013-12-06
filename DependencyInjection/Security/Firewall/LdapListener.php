@@ -27,16 +27,15 @@ class LdapListener implements ListenerInterface
         $request = $event->getRequest();
         //@todo
         if ($request->headers->has('x-wsse')) {
-
             $wsseRegex = '/UsernameToken Username="([^"]+)", PasswordDigest="([^"]+)", Nonce="([^"]+)", Created="([^"]+)"/';
 
             if (preg_match($wsseRegex, $request->headers->get('x-wsse'), $matches)) {
                 $token = new LdapUserToken();
-                $token->setUser($matches[1]);
 
-                $token->digest   = $matches[2];
-                $token->nonce    = $matches[3];
-                $token->created  = $matches[4];
+                $token->setUser($matches[1]);
+                $token->setDigest($matches[2]);
+                $token->setNonce($matches[3]);
+                $token->setCreated($matches[4]);
 
                 try {
                     $returnValue = $this->authenticationManager->authenticate($token);
