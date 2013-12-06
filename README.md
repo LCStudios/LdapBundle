@@ -28,8 +28,8 @@ To setup the LdapBundle, follow these steps:
 
         security:
             providers:
-                lcstudios_ldap:
-                    id: lcstudios_ldap_user_provider
+                lc_studios_ldap:
+                    id: lc_studios_ldap_user_provider
 
     also tell Symfony how to encode passwords. For example
 
@@ -39,7 +39,7 @@ To setup the LdapBundle, follow these steps:
 
     You can now also ensure that you define the parts of your app that will be under LDAP protection. e.g
 
-        lcstudios_ldap:
+        lc_studios_ldap:
             host: 'ldap://example.com'
             port: 389
             uid: 'uid'

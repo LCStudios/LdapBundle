@@ -1,24 +1,24 @@
 parameters:
     # userprovider param
-    lcstudios_ldap_user_provider.inactive_key_value: shadowflag=1
+    lc_studios_ldap_user_provider.inactive_key_value: shadowflag=1
     # class parameters
-    lcstudios_ldap.user_provider.class: LCStudios\LdapBundle\Security\User\LdapUserProvider
-    lcstudios_ldap.authentication_provider.class: LCStudios\LdapBundle\Security\Authentication\Provider\LdapAuthenticationProvider
+    lc_studios_ldap.user_provider.class: lc_studios\LdapBundle\Security\User\LdapUserProvider
+    lc_studios_ldap.authentication_provider.class: lc_studios\LdapBundle\Security\Authentication\Provider\LdapAuthenticationProvider
     security.user_checker.class: Symfony\Component\Security\Core\User\UserChecker
-    lcstudios_ldap.ldap.class: LCStudios\LdapBundle\Security\Ldap\Ldap
+    lc_studios_ldap.ldap.class: lc_studios\LdapBundle\Security\Ldap\Ldap
 
 services:
     security.user_checker:
         class: %security.user_checker.class%
 
-    lcstudios_ldap_user_provider:
-        class: %lcstudios_ldap.user_provider.class%
-        arguments: [@lcstudios_ldap.ldap, %lcstudios_ldap_user_provider.inactive_key_value%]
+    lc_studios_ldap_user_provider:
+        class: %lc_studios_ldap.user_provider.class%
+        arguments: [@lc_studios_ldap.ldap, %lc_studios_ldap_user_provider.inactive_key_value%]
 
-    lcstudios_ldap.security.authentication.provider:
-        class: %lcstudios_ldap.authentication_provider.class%
+    lc_studios_ldap.security.authentication.provider:
+        class: %lc_studios_ldap.authentication_provider.class%
         arguments: ['', @security.user_checker , '', %security.authentication.hide_user_not_found% ]
 
-    lcstudios_ldap.ldap:
-        class: %lcstudios_ldap.ldap.class%
-        arguments: [%lcstudios_ldap.host%, %lcstudios_ldap.port%, %lcstudios_ldap.uid%, %lcstudios_ldap.base_dn%, %lcstudios_ldap.authenticated_role%, %lcstudios_ldap.bind_user.dn%, %lcstudios_ldap.bind_user.password%]
+    lc_studios_ldap.ldap:
+        class: %lc_studios_ldap.ldap.class%
+        arguments: [%lc_studios_ldap.host%, %lc_studios_ldap.port%, %lc_studios_ldap.uid%, %lc_studios_ldap.base_dn%, %lc_studios_ldap.authenticated_role%, %lc_studios_ldap.bind_user.dn%, %lc_studios_ldap.bind_user.password%]
