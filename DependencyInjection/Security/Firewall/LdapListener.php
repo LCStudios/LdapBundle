@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterfac
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Mayflower\LdapBundle\Security\Authentication\Token\LdapUserToken;
 
-class WsseListener implements ListenerInterface
+class LdapListener implements ListenerInterface
 {
     protected $securityContext;
     protected $authenticationManager;
@@ -42,10 +42,12 @@ class WsseListener implements ListenerInterface
                     $returnValue = $this->authenticationManager->authenticate($token);
 
                     if ($returnValue instanceof TokenInterface) {
-                        return $this->securityContext->setToken($returnValue);
+                        $this->securityContext->setToken($returnValue);
                     } elseif ($returnValue instanceof Response) {
-                        return $event->setResponse($returnValue);
+                        $event->setResponse($returnValue);
                     }
+
+                    return null;
                 } catch (AuthenticationException $e) {
                     // you might log something here
                 }

@@ -8,6 +8,7 @@ use Mayflower\LdapBundle\Security\Ldap\Exception\LdapException;
 /*
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  * @author Francis Besset <francis.besset@gmail.com>
+ * @author Robin Gloster <robin.gloster@mayflower.de>
  * @author Markus Handschuh <markus.handschuh@mayflower.de>
  */
 class Ldap implements LdapInterface

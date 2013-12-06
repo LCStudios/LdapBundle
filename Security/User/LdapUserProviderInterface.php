@@ -27,8 +27,8 @@ interface LdapUserProviderInterface extends UserProviderInterface
      * This method must throw UsernameNotFoundException if the user is not
      * found.
      *
-     * @param string   $username The username
-     * @param password $username The password
+     * @param string $username The username
+     * @param string $password The password
      *
      * @return UserInterface
      *

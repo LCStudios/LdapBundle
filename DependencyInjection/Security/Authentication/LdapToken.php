@@ -1,7 +1,5 @@
 <?php
 
-// taken from the godforsaken cookbook. might as well be "how to serve man"
-
 namespace Mayflower\LdapBundle\Security\Authentication\Token;
 
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
