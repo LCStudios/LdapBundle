@@ -13,6 +13,7 @@ use Symfony\Component\DependencyInjection\Loader;
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  *
  * @author Robin Gloster <robin.gloster@lcstudios.de>
+ * @author Markus Handschuh <markus.handschuh@mayflower.de>
  */
 class LCStudiosLdapExtension extends Extension
 {
@@ -31,6 +32,7 @@ class LCStudiosLdapExtension extends Extension
         $container->setParameter('lcstudios_ldap.authenticated_role', $config['authenticated_role']);
         $container->setParameter('lcstudios_ldap.bind_user.dn', $config['bind_user']['dn']);
         $container->setParameter('lcstudios_ldap.bind_user.password', $config['bind_user']['password']);
+        $container->setParameter('lcstudios_ldap.group_attributes', $config['group_attributes']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

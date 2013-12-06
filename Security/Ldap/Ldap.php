@@ -55,6 +55,11 @@ class Ldap implements LdapInterface
     private $optReferrals;
 
     /**
+     * @var array
+     */
+    private $groupAttributes;
+
+    /**
      * @var string
      */
     private $username;
@@ -103,6 +108,7 @@ class Ldap implements LdapInterface
      * @param boolean $useSsl
      * @param boolean $useStartTls
      * @param boolean $optReferrals
+     * @param array $groupAttributes
      * @throws Exception\LdapException
      */
     public function __construct(
@@ -116,25 +122,26 @@ class Ldap implements LdapInterface
         $version           = 3,
         $useSsl            = false,
         $useStartTls       = false,
-        $optReferrals      = false
+        $optReferrals      = false,
+        $groupAttributes   = array()
     )
     {
         if (!extension_loaded('ldap')) {
             throw new LdapException('Ldap module is needed.');
         }
 
-        $this->host              = $host;
-        $this->port              = $port;
-        $this->dn                = $dn;
-        $this->usernameSuffix    = $usernameSuffix;
-        $this->authenticatedRole = $authenticatedRole;
-        $this->adminDn           = $adminDn;
-        $this->adminPassword     = $adminPassword;
-        $this->version           = $version;
-        $this->useSsl            = (boolean) $useSsl;
-        $this->useStartTls       = (boolean) $useStartTls;
-        $this->optReferrals      = (boolean) $optReferrals;
-        $this->connection        = null;
+        $this->setHost($host);
+        $this->setPort($port);
+        $this->setDn($dn);
+        $this->setUsernameSuffix($usernameSuffix);
+        $this->setAuthenticatedRole($authenticatedRole);
+        $this->setAdminDn($adminDn);
+        $this->setAdminPassword($adminPassword);
+        $this->setVersion($version);
+        $this->setUseSsl((bool) $useSsl);
+        $this->setUseStartTls((bool) $useStartTls);
+        $this->setOptReferrals((bool) $optReferrals);
+        $this->setGroupAttributes($groupAttributes);
     }
 
     /**
@@ -317,6 +324,70 @@ class Ldap implements LdapInterface
     }
 
     /**
+     * @param array $groupAttributes
+     */
+    public function setGroupAttributes($groupAttributes)
+    {
+        $this->groupAttributes = $groupAttributes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getGroupAttributes()
+    {
+        return $this->groupAttributes;
+    }
+
+    /**
+     * @param string $adminDn
+     */
+    public function setAdminDn($adminDn)
+    {
+        $this->adminDn = $adminDn;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdminDn()
+    {
+        return $this->adminDn;
+    }
+
+    /**
+     * @param string $adminPassword
+     */
+    public function setAdminPassword($adminPassword)
+    {
+        $this->adminPassword = $adminPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdminPassword()
+    {
+        return $this->adminPassword;
+    }
+
+    /**
+     * @param string $authenticatedRole
+     */
+    public function setAuthenticatedRole($authenticatedRole)
+    {
+        $this->authenticatedRole = $authenticatedRole;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthenticatedRole()
+    {
+        return $this->authenticatedRole;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function findByUsername($username, $query, $filter = '*')
@@ -496,16 +567,13 @@ class Ldap implements LdapInterface
             $this->bind();
         }
 
-        $memberOfListing    = $boundListing['memberof'];
-        $groupMemberListing = $boundListing['groupmembership'];
+        $roles           = array();
+        $groupAttributes = $this->getGroupAttributes();
+        foreach ($groupAttributes as $attribute) {
+            $roles = array_merge($roles, $this->matchRolesFromGroupListing($attribute));
+        }
 
-        $roles = array_merge(
-            array($this->authenticatedRole),
-            (isset($memberOfListing))    ? $this->matchRolesFromGroupListing($memberOfListing)    : array(),
-            (isset($groupMemberListing)) ? $this->matchRolesFromGroupListing($groupMemberListing) : array()
-        );
-
-        return array_unique($roles);
+        return array_unique(array_merge($this->authenticatedRole, $roles));
     }
 
     /**

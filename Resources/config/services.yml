@@ -21,4 +21,12 @@ services:
 
     lcstudios_ldap.ldap:
         class: %lcstudios_ldap.ldap.class%
-        arguments: [%lcstudios_ldap.host%, %lcstudios_ldap.port%, %lcstudios_ldap.uid%, %lcstudios_ldap.base_dn%, %lcstudios_ldap.authenticated_role%, %lcstudios_ldap.bind_user.dn%, %lcstudios_ldap.bind_user.password%]
+        arguments:
+          - %lcstudios_ldap.host%
+          - %lcstudios_ldap.port%
+          - %lcstudios_ldap.uid%
+          - %lcstudios_ldap.base_dn%
+          - %lcstudios_ldap.authenticated_role%
+          - %lcstudios_ldap.bind_user.dn%
+          - %lcstudios_ldap.bind_user.password%
+          - %lcstudios_ldap.group_attributes%

@@ -20,6 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
+ * @author Markus Handschuh <markus.handschuh@mayflower.de>
  */
 class HttpBasicLdapFactory extends HttpBasicFactory
 {
