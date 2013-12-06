@@ -23,6 +23,15 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class HttpBasicLdapFactory extends HttpBasicFactory
 {
+
+    /**
+     * @param ContainerBuilder $container
+     * @param string $id
+     * @param array $config
+     * @param string $userProvider
+     * @param mixed $defaultEntryPoint
+     * @return array
+     */
     public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
     {
         $provider = 'lcstudios_ldap_user_provider.'.$id;
@@ -44,6 +53,9 @@ class HttpBasicLdapFactory extends HttpBasicFactory
         return array($provider, $listenerId, $entryPointId);
     }
 
+    /**
+     * @return string
+     */
     public function getKey()
     {
         return 'http-basic-ldap';

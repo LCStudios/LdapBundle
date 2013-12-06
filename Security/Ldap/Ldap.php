@@ -5,7 +5,7 @@ namespace LCStudios\LdapBundle\Security\Ldap;
 use LCStudios\LdapBundle\Security\Ldap\Exception\ConnectionException;
 use LCStudios\LdapBundle\Security\Ldap\Exception\LdapException;
 
-/*
+/**
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  * @author Francis Besset <francis.besset@gmail.com>
  * @author Robin Gloster <robin@loc-com.de>
@@ -13,22 +13,80 @@ use LCStudios\LdapBundle\Security\Ldap\Exception\LdapException;
  */
 class Ldap implements LdapInterface
 {
+
+    /**
+     * @var string
+     */
     private $host;
+
+    /**
+     * @var int
+     */
     private $port;
+
+    /**
+     * @var string
+     */
     private $dn;
+
+    /**
+     * @var string
+     */
     private $usernameSuffix;
+
+    /**
+     * @var int
+     */
     private $version;
+
+    /**
+     * @var bool
+     */
     private $useSsl;
+
+    /**
+     * @var bool
+     */
     private $useStartTls;
+
+    /**
+     * @var bool
+     */
     private $optReferrals;
+
+    /**
+     * @var string
+     */
     private $username;
+
+    /**
+     * @var string
+     */
     private $password;
+
+    /**
+     * @var string
+     */
     private $adminDn;
+
+    /**
+     * @var string
+     */
     private $adminPassword;
+
+    /**
+     * @var string
+     */
     private $authenticatedRole;
 
+    /**
+     * @var array
+     */
     private $boundListing;
 
+    /**
+     * @var resource
+     */
     private $connection;
 
     /**
@@ -48,17 +106,17 @@ class Ldap implements LdapInterface
      * @throws Exception\LdapException
      */
     public function __construct(
-        $host = null,
-        $port = 389,
-        $dn = null,
-        $usernameSuffix = null,
+        $host              = null,
+        $port              = 389,
+        $dn                = null,
+        $usernameSuffix    = null,
         $authenticatedRole = 'ROLE_USER',
-        $adminDn = null,
-        $adminPassword = null,
-        $version = 3,
-        $useSsl = false,
-        $useStartTls = false,
-        $optReferrals = false
+        $adminDn           = null,
+        $adminPassword     = null,
+        $version           = 3,
+        $useSsl            = false,
+        $useStartTls       = false,
+        $optReferrals      = false
     )
     {
         if (!extension_loaded('ldap')) {
@@ -76,8 +134,7 @@ class Ldap implements LdapInterface
         $this->useSsl            = (boolean) $useSsl;
         $this->useStartTls       = (boolean) $useStartTls;
         $this->optReferrals      = (boolean) $optReferrals;
-
-        $this->connection = null;
+        $this->connection        = null;
     }
 
     /**
@@ -471,6 +528,9 @@ class Ldap implements LdapInterface
         return $roles;
     }
 
+    /**
+     * @return array
+     */
     public function getBoundListing()
     {
         return $this->boundListing;

@@ -19,9 +19,18 @@ use Symfony\Component\DependencyInjection\Reference;
  * FormLoginLdapFactory creates services for form login ldap authentication.
  *
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
+ * @author Markus Handschuh <markus.handschuh@mayflower.de>
  */
 class FormLoginLdapFactory extends FormLoginFactory
 {
+
+    /**
+     * @param ContainerBuilder $container
+     * @param string $id
+     * @param array $config
+     * @param string $userProviderId
+     * @return string
+     */
     protected function createAuthProvider(ContainerBuilder $container, $id, $config, $userProviderId)
     {
         $provider = 'lcstudios_ldap.security.authentication.provider.'.$id;
@@ -34,6 +43,9 @@ class FormLoginLdapFactory extends FormLoginFactory
         return $provider;
     }
 
+    /**
+     * @return string
+     */
     public function getKey()
     {
         return 'form-login-ldap';

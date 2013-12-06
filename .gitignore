@@ -2,5 +2,7 @@
 .idea
 .settings
 .buildpath
-LdapBundle/Resources/config/ldapcredentials.yml
 *.iml
+vendor
+composer.lock
+.DS_Store
