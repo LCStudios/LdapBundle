@@ -2,10 +2,10 @@ parameters:
     # userprovider param
     lc_studios_ldap_user_provider.inactive_key_value: shadowflag=1
     # class parameters
-    lc_studios_ldap.user_provider.class: lc_studios\LdapBundle\Security\User\LdapUserProvider
-    lc_studios_ldap.authentication_provider.class: lc_studios\LdapBundle\Security\Authentication\Provider\LdapAuthenticationProvider
+    lc_studios_ldap.user_provider.class: LCStudios\LdapBundle\Security\User\LdapUserProvider
+    lc_studios_ldap.authentication_provider.class: LCStudios\LdapBundle\Security\Authentication\Provider\LdapAuthenticationProvider
     security.user_checker.class: Symfony\Component\Security\Core\User\UserChecker
-    lc_studios_ldap.ldap.class: lc_studios\LdapBundle\Security\Ldap\Ldap
+    lc_studios_ldap.ldap.class: LCStudios\LdapBundle\Security\Ldap\Ldap
 
 services:
     security.user_checker:
