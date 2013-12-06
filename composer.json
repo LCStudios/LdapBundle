@@ -6,10 +6,5 @@
  "autoload": {
   "psr-0": { "LCStudios\\LdapBundle": "" }
  },
- "target-dir": "LCStudios/LdapBundle",
- "extra": {
-  "branch-alias": {
-   "dev-master": "master"
-  }
- }
+ "target-dir": "LCStudios/LdapBundle"
 }
