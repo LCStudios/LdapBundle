@@ -1,14 +1,14 @@
 <?php
 
-namespace Mayflower\LdapBundle;
+namespace LCStudios\LdapBundle;
 
-use Mayflower\LdapBundle\DependencyInjection\Security\Factory\FormLoginLdapFactory;
-use Mayflower\LdapBundle\DependencyInjection\Security\Factory\HttpBasicLdapFactory;
+use LCStudios\LdapBundle\DependencyInjection\Security\Factory\FormLoginLdapFactory;
+use LCStudios\LdapBundle\DependencyInjection\Security\Factory\HttpBasicLdapFactory;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class MayflowerLdapBundle extends Bundle
+class LCStudiosLdapBundle extends Bundle
 {
 
     public function build(ContainerBuilder $container)

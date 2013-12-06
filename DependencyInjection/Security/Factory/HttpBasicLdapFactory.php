@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Mayflower\LdapBundle\DependencyInjection\Security\Factory;
+namespace LCStudios\LdapBundle\DependencyInjection\Security\Factory;
 
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\HttpBasicFactory;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
@@ -25,7 +25,7 @@ class HttpBasicLdapFactory extends HttpBasicFactory
 {
     public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
     {
-        $provider = 'mayflower_ldap_user_provider.'.$id;
+        $provider = 'lcstudios_ldap_user_provider.'.$id;
         $container
             ->setDefinition($provider, new DefinitionDecorator('security.authentication.provider.ldap'))
             ->replaceArgument(0, new Reference($userProvider))

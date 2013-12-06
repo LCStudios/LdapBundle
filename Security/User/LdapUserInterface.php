@@ -1,6 +1,6 @@
 <?php
 
-namespace Mayflower\LdapBundle\Security\User;
+namespace LCStudios\LdapBundle\Security\User;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 

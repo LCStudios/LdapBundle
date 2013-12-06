@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Mayflower\LdapBundle\Tests\Security\Authentication\Provider;
+namespace LCStudios\LdapBundle\Tests\Security\Authentication\Provider;
 
-use Mayflower\LdapBundle\Security\Authentication\Provider\LdapAuthenticationProvider;
+use LCStudios\LdapBundle\Security\Authentication\Provider\LdapAuthenticationProvider;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\User;
@@ -55,7 +55,7 @@ class LdapAuthenticationProviderTest extends \PHPUnit_Framework_TestCase
     public function getProvider($isLoadMethodCalled = false, $validUser = true)
     {
         $userProvider = $this
-            ->getMockBuilder('Mayflower\\LdapBundle\\Login\\User\\LdapUserProvider')
+            ->getMockBuilder('LCStudios\\LdapBundle\\Login\\User\\LdapUserProvider')
             ->disableOriginalConstructor()
             ->getMock()
         ;

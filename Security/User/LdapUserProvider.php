@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Mayflower\LdapBundle\Security\User;
+namespace LCStudios\LdapBundle\Security\User;
 
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Mayflower\LdapBundle\Security\Ldap\Exception\ConnectionException;
-use Mayflower\LdapBundle\Security\Ldap\LdapInterface;
-use Mayflower\LdapBundle\Security\User\LdapUser;
-use Mayflower\LdapBundle\Security\User\LdapUserInterface;
+use LCStudios\LdapBundle\Security\Ldap\Exception\ConnectionException;
+use LCStudios\LdapBundle\Security\Ldap\LdapInterface;
+use LCStudios\LdapBundle\Security\User\LdapUser;
+use LCStudios\LdapBundle\Security\User\LdapUserInterface;
 
 
 /**
@@ -97,7 +97,7 @@ class LdapUserProvider implements LdapUserProviderInterface
      */
     public function supportsClass($class)
     {
-        return $class === 'Mayflower\LdapBundle\Security\User\LdapUser';
+        return $class === 'LCStudios\LdapBundle\Security\User\LdapUser';
     }
 
 }

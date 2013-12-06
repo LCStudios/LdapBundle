@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Mayflower\LdapBundle\DependencyInjection\Security\Factory;
+namespace LCStudios\LdapBundle\DependencyInjection\Security\Factory;
 
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\FormLoginFactory;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
@@ -24,9 +24,9 @@ class FormLoginLdapFactory extends FormLoginFactory
 {
     protected function createAuthProvider(ContainerBuilder $container, $id, $config, $userProviderId)
     {
-        $provider = 'mayflower_ldap.security.authentication.provider.'.$id;
+        $provider = 'lcstudios_ldap.security.authentication.provider.'.$id;
         $container
-            ->setDefinition($provider, new DefinitionDecorator('mayflower_ldap.security.authentication.provider'))
+            ->setDefinition($provider, new DefinitionDecorator('lcstudios_ldap.security.authentication.provider'))
             ->replaceArgument(0, new Reference($userProviderId))
             ->replaceArgument(2, $id)
         ;

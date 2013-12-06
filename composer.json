@@ -1,12 +1,12 @@
 {
- "name": "mayflower/ldap-bundle",
+ "name": "lcstudios/ldap-bundle",
  "type": "symfony-bundle",
- "description": "Symfony MayflowerLdapBundle",
+ "description": "Symfony LCStudiosLdapBundle",
  "minimum-stability": "dev",
  "autoload": {
-  "psr-0": { "Mayflower\\LdapBundle": "" }
+  "psr-0": { "LCStudios\\LdapBundle": "" }
  },
- "target-dir": "Mayflower/LdapBundle",
+ "target-dir": "LCStudios/LdapBundle",
  "extra": {
   "branch-alias": {
    "dev-master": "master"

@@ -1,13 +1,13 @@
 <?php
 
-namespace Mayflower\LdapBundle\Security\Authentication\Provider;
+namespace LCStudios\LdapBundle\Security\Authentication\Provider;
 
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationServiceException;
 use Symfony\Component\Security\Core\Authentication\Provider\UserAuthenticationProvider;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Mayflower\LdapBundle\Security\User\LdapUserProviderInterface;
+use LCStudios\LdapBundle\Security\User\LdapUserProviderInterface;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 

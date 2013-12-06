@@ -1,6 +1,6 @@
 <?php
 
-namespace Mayflower\LdapBundle\Security\Firewall;
+namespace LCStudios\LdapBundle\Security\Firewall;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Mayflower\LdapBundle\Security\Authentication\Token\LdapUserToken;
+use LCStudios\LdapBundle\Security\Authentication\Token\LdapUserToken;
 
 class LdapListener implements ListenerInterface
 {

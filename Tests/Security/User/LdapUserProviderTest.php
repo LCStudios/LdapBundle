@@ -1,10 +1,10 @@
 <?php
 
-namespace Mayflower\LdapBundle\Tests\Security\User;
+namespace LCStudios\LdapBundle\Tests\Security\User;
 
-use Mayflower\LdapBundle\Security\User\LdapUserProvider;
-use Mayflower\LdapBundle\Security\Ldap\Exception\ConnectionException;
-use Mayflower\LdapBundle\Security\User\LdapUser;
+use LCStudios\LdapBundle\Security\User\LdapUserProvider;
+use LCStudios\LdapBundle\Security\Ldap\Exception\ConnectionException;
+use LCStudios\LdapBundle\Security\User\LdapUser;
 
 
 class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
@@ -14,7 +14,7 @@ class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadUserByUsername()
     {
-        $ldap = $this->getMock('Mayflower\LdapBundle\Security\Ldap\LdapInterface');
+        $ldap = $this->getMock('LCStudios\LdapBundle\Security\Ldap\LdapInterface');
 
         $provider = new LdapUserProvider($ldap);
         $user = $provider->loadUserByUsername('foo');
@@ -22,7 +22,7 @@ class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadUserByUsernameAndPasswordOk()
     {
-        $ldap = $this->getMock('Mayflower\LdapBundle\Security\Ldap\LdapInterface');
+        $ldap = $this->getMock('LCStudios\LdapBundle\Security\Ldap\LdapInterface');
         $ldap
             ->expects($this->once())
             ->method('setUsername')
@@ -49,7 +49,7 @@ class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
         $provider = new LdapUserProvider($ldap);
         $user = $provider->loadUserByUsernameAndPassword('foo', 'bar');
 
-        $this->assertInstanceOf('Mayflower\LdapBundle\Security\User\LdapUser', $user);
+        $this->assertInstanceOf('LCStudios\LdapBundle\Security\User\LdapUser', $user);
         $this->assertEquals('foo', $user->getUsername());
         $this->assertEquals(null, $user->getPassword());
         $this->assertEquals(array('ROLE_USER'), $user->getRoles());
@@ -61,7 +61,7 @@ class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadUserByUsernameAndPasswordNOk()
     {
-        $ldap = $this->getMock('Mayflower\LdapBundle\Security\Ldap\LdapInterface');
+        $ldap = $this->getMock('LCStudios\LdapBundle\Security\Ldap\LdapInterface');
         $ldap
             ->expects($this->once())
             ->method('setUsername')
@@ -85,7 +85,7 @@ class LdapUserProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadUserByUserNameAndPasswordInactive()
     {
-        $ldap = $this->getMock('Mayflower\LdapBundle\Security\Ldap\LdapInterface');
+        $ldap = $this->getMock('LCStudios\LdapBundle\Security\Ldap\LdapInterface');
         $ldap
             ->expects($this->once())
             ->method('usernameHasListing')

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Mayflower\LdapBundle\Security\Ldap\Exception;
+namespace LCStudios\LdapBundle\Security\Ldap\Exception;
 
 /**
  * ConnectionException is throw if binding to ldap can not be established

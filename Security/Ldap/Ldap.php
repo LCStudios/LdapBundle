@@ -1,14 +1,14 @@
 <?php
 
-namespace Mayflower\LdapBundle\Security\Ldap;
+namespace LCStudios\LdapBundle\Security\Ldap;
 
-use Mayflower\LdapBundle\Security\Ldap\Exception\ConnectionException;
-use Mayflower\LdapBundle\Security\Ldap\Exception\LdapException;
+use LCStudios\LdapBundle\Security\Ldap\Exception\ConnectionException;
+use LCStudios\LdapBundle\Security\Ldap\Exception\LdapException;
 
 /*
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  * @author Francis Besset <francis.besset@gmail.com>
- * @author Robin Gloster <robin.gloster@mayflower.de>
+ * @author Robin Gloster <robin@loc-com.de>
  * @author Markus Handschuh <markus.handschuh@mayflower.de>
  */
 class Ldap implements LdapInterface

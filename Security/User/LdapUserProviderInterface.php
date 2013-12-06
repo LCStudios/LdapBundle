@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Mayflower\LdapBundle\Security\User;
+namespace LCStudios\LdapBundle\Security\User;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mayflower\LdapBundle\DependencyInjection;
+namespace LCStudios\LdapBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -12,9 +12,9 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  *
- * @author Robin Gloster <robin.gloster@mayflower.de>
+ * @author Robin Gloster <robin.gloster@lcstudios.de>
  */
-class MayflowerLdapExtension extends Extension
+class LCStudiosLdapExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -24,13 +24,13 @@ class MayflowerLdapExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('mayflower_ldap.host', $config['host']);
-        $container->setParameter('mayflower_ldap.port', $config['port']);
-        $container->setParameter('mayflower_ldap.uid', $config['uid']);
-        $container->setParameter('mayflower_ldap.base_dn', $config['base_dn']);
-        $container->setParameter('mayflower_ldap.authenticated_role', $config['authenticated_role']);
-        $container->setParameter('mayflower_ldap.bind_user.dn', $config['bind_user']['dn']);
-        $container->setParameter('mayflower_ldap.bind_user.password', $config['bind_user']['password']);
+        $container->setParameter('lcstudios_ldap.host', $config['host']);
+        $container->setParameter('lcstudios_ldap.port', $config['port']);
+        $container->setParameter('lcstudios_ldap.uid', $config['uid']);
+        $container->setParameter('lcstudios_ldap.base_dn', $config['base_dn']);
+        $container->setParameter('lcstudios_ldap.authenticated_role', $config['authenticated_role']);
+        $container->setParameter('lcstudios_ldap.bind_user.dn', $config['bind_user']['dn']);
+        $container->setParameter('lcstudios_ldap.bind_user.password', $config['bind_user']['password']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mayflower\LdapBundle\Security\Ldap;
+namespace LCStudios\LdapBundle\Security\Ldap;
 
 use Symfony\Component\Security\Ldap\Exception\ConnectionException;
 

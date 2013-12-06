@@ -1,6 +1,6 @@
 <?php
 
-namespace Mayflower\LdapBundle\Security\Authentication\Token;
+namespace LCStudios\LdapBundle\Security\Authentication\Token;
 
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 

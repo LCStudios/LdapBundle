@@ -1,5 +1,5 @@
 ====
-MayflowerLdapBundle
+LCStudiosLdapBundle
 ====
 
 This bundle is forked from [DapsBundle](https://github.com/relwell/DapsBundle) which is based on the pull request accepted by Symfony2 for LDAP support.
@@ -29,20 +29,20 @@ To setup the LdapBundle, follow these steps:
 
         security:
             providers:
-                mayflower_ldap:
-                    id: mayflower_ldap_user_provider
+                lcstudios_ldap:
+                    id: lcstudios_ldap_user_provider
 
     also tell Symfony how to encode passwords. For example
     ::
 
         security:
             encoders:
-                Mayflower\LdapBundle\Security\User\LdapUser: plaintext
+                LCStudios\LdapBundle\Security\User\LdapUser: plaintext
 
     You can now also ensure that you define the parts of your app that will be under LDAP protection. e.g
     ::
 
-        mayflower_ldap:
+        lcstudios_ldap:
             host: 'ldap://example.com'
             port: 389
             uid: 'uid'

@@ -1,9 +1,9 @@
 <?php
 
-namespace Mayflower\LdapBundle\Security\User;
+namespace LCStudios\LdapBundle\Security\User;
 
 use Symfony\Component\Security\Core\User\User;
-use Mayflower\LdapBundle\Security\User\LdapUserInterface;
+use LCStudios\LdapBundle\Security\User\LdapUserInterface;
 
 class LdapUser implements LdapUserInterface
 {
