@@ -496,13 +496,13 @@ class Ldap implements LdapInterface
             $this->bind();
         }
 
-        $memberOfListing    = $boundListing['memberof'];
-        $groupMemberListing = $boundListing['groupmembership'];
+        $memberOfListing    = array_key_exists('memberof', $boundListing) ? $boundListing['memberof'] : array();
+        $groupMemberListing = array_key_exists('groupmembership', $boundListing) ? $boundListing['groupmembership'] : array();
 
         $roles = array_merge(
             array($this->authenticatedRole),
-            (isset($memberOfListing))    ? $this->matchRolesFromGroupListing($memberOfListing)    : array(),
-            (isset($groupMemberListing)) ? $this->matchRolesFromGroupListing($groupMemberListing) : array()
+            $this->matchRolesFromGroupListing($memberOfListing),
+            $this->matchRolesFromGroupListing($groupMemberListing)
         );
 
         return array_unique($roles);
