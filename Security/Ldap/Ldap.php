@@ -573,7 +573,7 @@ class Ldap implements LdapInterface
             $roles = array_merge($roles, $this->matchRolesFromGroupListing($attribute));
         }
 
-        return array_unique(array_merge($this->authenticatedRole, $roles));
+        return array_unique(array_merge(array($this->authenticatedRole), $roles));
     }
 
     /**
