@@ -21,7 +21,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('lcstudios_ldap');
+        $rootNode = $treeBuilder->root('lc_studios_ldap');
 
         $rootNode
             ->children()

@@ -25,24 +25,21 @@ To setup the LdapBundle, follow these steps:
 
 1. Install via composer
 2. Modify ``app/config/security.yml`` and add your ldap user provider
-    ::
 
         security:
             providers:
-                lcstudios_ldap:
-                    id: lcstudios_ldap_user_provider
+                lc_studios_ldap:
+                    id: lc_studios_ldap_user_provider
 
     also tell Symfony how to encode passwords. For example
-    ::
 
         security:
             encoders:
                 LCStudios\LdapBundle\Security\User\LdapUser: plaintext
 
     You can now also ensure that you define the parts of your app that will be under LDAP protection. e.g
-    ::
 
-        lcstudios_ldap:
+        lc_studios_ldap:
             host: 'ldap://example.com'
             port: 389
             uid: 'uid'
@@ -54,13 +51,12 @@ To setup the LdapBundle, follow these steps:
 
 
     Add your LDAP server specific configs. e.g
-    ::
 
         secured_area:
             pattern:    ^/
             form-login-ldap: true
 
-3. Setup your ``SecurityController``, routes and templates as detailed in the `Security Chapter <http://symfony.com/doc/current/book/security.html>`_ of the Symfony Documentation.
+3. Setup your ``SecurityController``, routes and templates as detailed in the [Security Chapter](http://symfony.com/doc/current/book/security.html) of the Symfony Documentation.
 
 4. Add Bundle to AppKernel.
 

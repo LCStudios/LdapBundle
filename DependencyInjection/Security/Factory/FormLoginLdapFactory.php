@@ -33,9 +33,9 @@ class FormLoginLdapFactory extends FormLoginFactory
      */
     protected function createAuthProvider(ContainerBuilder $container, $id, $config, $userProviderId)
     {
-        $provider = 'lcstudios_ldap.security.authentication.provider.'.$id;
+        $provider = 'lc_studios_ldap.security.authentication.provider.'.$id;
         $container
-            ->setDefinition($provider, new DefinitionDecorator('lcstudios_ldap.security.authentication.provider'))
+            ->setDefinition($provider, new DefinitionDecorator('lc_studios_ldap.security.authentication.provider'))
             ->replaceArgument(0, new Reference($userProviderId))
             ->replaceArgument(2, $id)
         ;
