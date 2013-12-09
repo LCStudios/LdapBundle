@@ -25,6 +25,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('bind_user')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('dn')
                             ->defaultNull()
