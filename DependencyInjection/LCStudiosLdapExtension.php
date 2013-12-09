@@ -13,7 +13,6 @@ use Symfony\Component\DependencyInjection\Loader;
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  *
  * @author Robin Gloster <robin.gloster@lcstudios.de>
- * @author Markus Handschuh <markus.handschuh@mayflower.de>
  */
 class LCStudiosLdapExtension extends Extension
 {
@@ -25,14 +24,13 @@ class LCStudiosLdapExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('lcstudios_ldap.host', $config['host']);
-        $container->setParameter('lcstudios_ldap.port', $config['port']);
-        $container->setParameter('lcstudios_ldap.uid', $config['uid']);
-        $container->setParameter('lcstudios_ldap.base_dn', $config['base_dn']);
-        $container->setParameter('lcstudios_ldap.authenticated_role', $config['authenticated_role']);
-        $container->setParameter('lcstudios_ldap.bind_user.dn', $config['bind_user']['dn']);
-        $container->setParameter('lcstudios_ldap.bind_user.password', $config['bind_user']['password']);
-        $container->setParameter('lcstudios_ldap.group_attributes', $config['group_attributes']);
+        $container->setParameter('lc_studios_ldap.host', $config['host']);
+        $container->setParameter('lc_studios_ldap.port', $config['port']);
+        $container->setParameter('lc_studios_ldap.uid', $config['uid']);
+        $container->setParameter('lc_studios_ldap.base_dn', $config['base_dn']);
+        $container->setParameter('lc_studios_ldap.authenticated_role', $config['authenticated_role']);
+        $container->setParameter('lc_studios_ldap.bind_user.dn', $config['bind_user']['dn']);
+        $container->setParameter('lc_studios_ldap.bind_user.password', $config['bind_user']['password']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

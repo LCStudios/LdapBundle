@@ -11,7 +11,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
  *
  * @author Robin Gloster <robin@loc-com.de>
- * @author Markus Handschuh <markus.handschuh@mayflower.de>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -25,8 +24,6 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode('group_attributes')
-                ->end()
                 ->arrayNode('bind_user')
                     ->children()
                         ->scalarNode('dn')

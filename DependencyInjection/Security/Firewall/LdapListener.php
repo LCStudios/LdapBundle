@@ -11,22 +11,9 @@ use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterfac
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use LCStudios\LdapBundle\Security\Authentication\Token\LdapUserToken;
 
-/**
- * Class LdapListener
- *
- * @author Markus Handschuh <markus.handschuh@mayflower.de>
- */
 class LdapListener implements ListenerInterface
 {
-
-    /**
-     * @var SecurityContextInterface
-     */
     protected $securityContext;
-
-    /**
-     * @var AuthenticationManagerInterface
-     */
     protected $authenticationManager;
 
     public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager)
@@ -35,10 +22,6 @@ class LdapListener implements ListenerInterface
         $this->authenticationManager = $authenticationManager;
     }
 
-    /**
-     * @param GetResponseEvent $event
-     * @return null
-     */
     public function handle(GetResponseEvent $event)
     {
         $request = $event->getRequest();
